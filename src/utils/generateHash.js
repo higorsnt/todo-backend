@@ -1,9 +1,9 @@
 const bcrypt = require('bcryptjs');
 
 const generateHash = (password, callback) => {
-  bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(password, salt, null, (err, hash) => callback(hash));
-  });
+  let salt = bcrypt.genSaltSync(10);
+  var hash = bcrypt.hashSync(password, salt);
+  callback(hash);
 };
 
 module.exports = generateHash;
