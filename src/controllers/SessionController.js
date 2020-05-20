@@ -7,7 +7,7 @@ module.exports = {
     const { name, email, password } = request.body;
 
     const user = await connection('users')
-      .where({ email })
+      .whereRaw("LOWER(email) = LOWER(?)", email)
       .first();
     
     if (user) {
